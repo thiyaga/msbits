@@ -5,4 +5,9 @@
         <param-name>application.environment</param-name>
         <param-value>prod</param-value>
     </context-param>
+    <resource name="jdbc/pricingdb" auth="Container" type="javax.sql.DataSource">
+ 		<param name="username" value="thiyaga" />
+ 		<param name="password" value="thiyaga" />
+ 		<param name="url" value="jdbc:cloudbees://pricingdb" />
+	</resource>
 </cloudbees-web-app>

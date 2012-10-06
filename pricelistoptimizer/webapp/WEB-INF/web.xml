@@ -3,14 +3,34 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
    version="2.5"> 
-  <display-name>Simple</display-name>
+  <display-name>Price optimizer REST Service</display-name>
   
-  <servlet>
-    <servlet-name>HelloServlet</servlet-name>  
-    <servlet-class>example.HelloServlet</servlet-class>  
-  </servlet>
+   <servlet>
+	<servlet-name>ShoppingListServlet</servlet-name>
+	<servlet-class>
+      com.sun.jersey.spi.container.servlet.ServletContainer
+    </servlet-class>
+    <init-param>
+	  <param-name>com.sun.jersey.config.property.packages</param-name>
+	  <param-value>com.priceoptimizer.service</param-value>
+	</init-param>
+	<load-on-startup>1</load-on-startup>
+  </servlet>  
+ 
   <servlet-mapping>
-    <servlet-name>HelloServlet</servlet-name>
-    <url-pattern>/hello</url-pattern>
+	<servlet-name>ShoppingListServlet</servlet-name>
+    <url-pattern>/optimizer/*</url-pattern>
   </servlet-mapping>
+  
+   <persistence-context-ref>
+     <persistence-context-ref-name>persistence/em</persistence-context-ref-name>  
+     <persistence-unit-name>optimizer</persistence-unit-name>
+  </persistence-context-ref>  
+ 
+  <resource-ref>
+ <res-ref-name>jdbc/pricingdb</res-ref-name>
+ <res-type>javax.sql.DataSource</res-type>
+ <res-auth>Container</res-auth>
+</resource-ref>
+ 
 </web-app>
