@@ -32,7 +32,7 @@ public class ShoppingListServlet {
 		StatusType statusCode = null;
 		String msg = null;
 		long key = 0;
-		//int sizeoflist=0;
+		
 				
 		StringWriter sw = new StringWriter();
 		JsonWriter writer = new JsonWriter(sw);
@@ -41,13 +41,16 @@ public class ShoppingListServlet {
 		try {			
 		    dao.connect();
 		    
-		    //sizeoflist = shoppinglist.shoppingitems.size();
+		    
 		    // Create a new shopping list (key = shopping list id)
-			key = dao.newShoppingList(shoppinglist.getuser());
+			key = dao.newShoppingList(shoppinglist);
 			if (key == 0) {
     			// Return 400 Bad Request
 	    		statusCode = Response.Status.BAD_REQUEST;
-			} else {	
+			} 
+			
+			
+			else {	
 				writer.beginObject();
 				writer.name("shoppinglistid").value(Long.toString(key));
 				writer.endObject();
