@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 
 import com.priceoptimizer.model.Shoppinglist;
+import com.priceoptimizer.model.pricelist;
 
 
 public class DAO {
@@ -129,6 +130,49 @@ public class DAO {
    
    
  
+    public void retreive_all_pricelist(pricelist pricelist,Shoppinglist shoppinglist)
+    {
+    	
+        try{
+        	ResultSet rst = null;
+        	String prod_id=null;
+        	for(int i=0;i<shoppinglist.shoppingitems.size();i++)
+        	{
+        		if(prod_id==null)
+        			prod_id = "'"+shoppinglist.shoppingitems.get(i).getprodid()+"'";
+        		else
+        		{
+        			prod_id = prod_id+","+"'"+shoppinglist.shoppingitems.get(i).getprodid()+"'";
+        		}
+        	}
+        	String query = "select p_list.prod_id,p_list.retailer_id,prod.prod_name,ret.retailer_name,prod.mrp_price,p_list.selling_price from price_list p_list,product prod,retailer ret "
+        					+ "where prod.prod_id = p_list.prod_id and "
+        					+ "ret.retailer_id = p_list.retailer_id and "
+        					+ "p_list.prod_id in (" + prod_id + ");";
+            stmt = getConnection().createStatement();
+            rst = stmt.executeQuery(query);
+            
+            if(rst != null)
+            {
+            	while(rst.next())
+            	{
+            		pricelist pricelist_rst = new pricelist();
+            		pricelist_rst.set_prod_id(rst.getInt("prod_id"));
+            		pricelist_rst.set_retailer_id(rst.getInt("retailer_id"));
+            		pricelist_rst.set_retailer_name(rst.getString("retailer_name"));
+            		pricelist_rst.set_prod_name(rst.getString("prod_name"));
+            		pricelist_rst.set_mrp(rst.getFloat("mrp_price"));
+            		pricelist_rst.set_selling_price(rst.getFloat("selling_price"));
+            		pricelist.add_pricelist_all(pricelist_rst);
+            	}
+            }
+            
+        } 
+        catch (Exception e){
+            e.printStackTrace ();
+        }
+    }
+    
        
     public void disconnect (){
         try{

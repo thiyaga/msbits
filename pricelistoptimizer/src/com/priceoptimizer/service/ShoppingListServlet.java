@@ -15,13 +15,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.StatusType;
 
 import com.priceoptimizer.model.Shoppinglist;
+import com.priceoptimizer.model.pricelist;
 import com.google.gson.stream.JsonWriter;
+
 
 @Path("/shoppinglist")
 public class ShoppingListServlet {
 	
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
+	private pricelist pricelist =  new pricelist();
 	
 	@POST
     @Path("new")
@@ -50,7 +53,10 @@ public class ShoppingListServlet {
 			} 
 			
 			
-			else {	
+			else {
+				dao.retreive_all_pricelist(pricelist,shoppinglist);
+				priceoptimizer.generate_pricelist_selected(pricelist, shoppinglist);
+				
 				writer.beginObject();
 				writer.name("shoppinglistid").value(Long.toString(key));
 				writer.endObject();
