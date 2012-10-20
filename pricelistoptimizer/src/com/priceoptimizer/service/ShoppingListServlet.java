@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.StatusType;
 
 import com.priceoptimizer.model.Shoppinglist;
 import com.priceoptimizer.model.pricelist;
+import com.priceoptimizer.model.Combinations;
 import com.google.gson.stream.JsonWriter;
 
 
@@ -25,6 +26,7 @@ public class ShoppingListServlet {
 	private static final long serialVersionUID = 1L;
 	private DAO dao = new DAO();
 	private pricelist pricelist =  new pricelist();
+	private Combinations combinations = new Combinations();
 	
 	@POST
     @Path("new")
@@ -56,6 +58,16 @@ public class ShoppingListServlet {
 			else {
 				dao.retreive_all_pricelist(pricelist,shoppinglist);
 				priceoptimizer.generate_pricelist_selected(pricelist, shoppinglist);
+				priceoptimizer.retreive_retialers_all(pricelist);
+				priceoptimizer.retreive_retailers_best(pricelist);
+				try
+				{
+				priceoptimizer.generate_all_combinations(combinations,pricelist);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 				
 				writer.beginObject();
 				writer.name("shoppinglistid").value(Long.toString(key));

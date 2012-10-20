@@ -114,5 +114,16 @@ public class pricelist {
 	{
 		this.pricelist_selected.add(pricelist);
 	}
+	
+	public void add_retailers_all(int retailer_id)
+	{
+		this.retailers_all.add(Integer.valueOf(retailer_id));
+		
+	}
+	
+	public void add_retailers_best(int retailer_id)
+	{
+		this.retailers_best.add(Integer.valueOf(retailer_id));
+	}
 }
 
