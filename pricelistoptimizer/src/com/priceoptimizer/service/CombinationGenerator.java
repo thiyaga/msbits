@@ -86,7 +86,6 @@ public class CombinationGenerator {
 	      ans.data[j+1] = ans.data[j] + 1;
 
 	    return ans;
-	  } // Successor()
-
+	  }
 
 }

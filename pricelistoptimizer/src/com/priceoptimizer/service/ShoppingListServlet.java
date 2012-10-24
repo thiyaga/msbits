@@ -18,6 +18,7 @@ import com.priceoptimizer.model.Shoppinglist;
 import com.priceoptimizer.model.pricelist;
 import com.priceoptimizer.model.Combinations;
 import com.google.gson.stream.JsonWriter;
+import com.google.gson.Gson;
 
 
 @Path("/shoppinglist")
@@ -39,8 +40,9 @@ public class ShoppingListServlet {
 		long key = 0;
 		
 				
-		StringWriter sw = new StringWriter();
-		JsonWriter writer = new JsonWriter(sw);
+		//StringWriter sw = new StringWriter();
+		//JsonWriter writer = new JsonWriter(sw);
+		Gson gson = new Gson();		
 		DAO dao = getDAO();
 		
 		try {			
@@ -69,16 +71,17 @@ public class ShoppingListServlet {
 					e.printStackTrace();
 				}
 				
-				writer.beginObject();
-				writer.name("shoppinglistid").value(Long.toString(key));
-				writer.endObject();
-				writer.close();
-				
+				//writer.beginObject();
+			   // writer.name("shoppinglistid").value(Long.toString(key));
+				//writer.endObject();
+				//writer.close();
+				String json_output = gson.toJson(combinations);
 				statusCode = Response.Status.OK;
-				msg = sw.toString();
+				//msg = sw.toString();
+				msg = json_output.toString();
 			}
 		} 
-		catch (IOException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 			
 			// Return 500 Internal Server Error
