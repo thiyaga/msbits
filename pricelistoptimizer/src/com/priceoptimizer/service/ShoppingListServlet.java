@@ -71,6 +71,11 @@ public class ShoppingListServlet {
 					e.printStackTrace();
 				}
 				
+				priceoptimizer.generate_all_combinations_pricelist(combinations, pricelist, shoppinglist);
+				priceoptimizer.validate_combinations(combinations);
+				priceoptimizer.set_total_msrsp(combinations);
+				priceoptimizer.set_total_marsp(combinations);
+				priceoptimizer.generate_optimized_combinations(combinations, pricelist);
 				//writer.beginObject();
 			   // writer.name("shoppinglistid").value(Long.toString(key));
 				//writer.endObject();

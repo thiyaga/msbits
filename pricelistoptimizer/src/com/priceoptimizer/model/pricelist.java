@@ -14,6 +14,9 @@ public class pricelist {
 	public float mrp;
 	public float selling_price;
 	public float min_selling_price;
+	public float quantity;
+	public float total_mrp; //mrp*quantity
+	public float total_selling_price;//selling_price*quantity
 	public List<Integer> retailers_all = new ArrayList<Integer> ();
 	public List<Integer> retailers_best = new ArrayList<Integer> ();
 	public List<pricelist> pricelist_all = new ArrayList<pricelist>(); 
@@ -92,6 +95,26 @@ public class pricelist {
 	public float get_min_selling_price()
 	{
 		return min_selling_price;
+	}
+	
+	public void set_total_mrp(float total_mrp)
+	{
+		this.total_mrp = total_mrp;
+	}
+	
+	public float get_total_mrp()
+	{
+		return total_mrp;
+	}
+	
+	public void set_total_selling_price(float total_selling_price)
+	{
+		this.total_selling_price = total_selling_price;
+	}
+	
+	public float get_total_selling_price()
+	{
+		return total_selling_price;
 	}
 	
 		
