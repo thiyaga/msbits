@@ -1,5 +1,8 @@
 package com.priceoptimizer.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.priceoptimizer.model.Combinations;
 
 public class CombinationGenerator {
@@ -53,13 +56,15 @@ public class CombinationGenerator {
 	}
 
 
-	  public void add_combination(Combinations combination,int num_of_retailers)
+	  public void add_combination(Combinations combination,int num_of_retailers,Map<String,Integer> retailer_index_mapping)
 	  {
+		  
 		  Combinations generated_combinations = new Combinations();
 		  generated_combinations.set_number_of_retailers(num_of_retailers);
 		  for(int i=0;i<this.k;++i)
 		  {
-			  generated_combinations.add_retailer_combination(this.data[i]);
+			  //generated_combinations.add_retailer_combination(this.data[i]);
+			  generated_combinations.add_retailer_combination(Integer.parseInt(retailer_index_mapping.get(String.valueOf(this.data[i])).toString()));
 			  
 		  }
 		  combination.add_all_combinations(generated_combinations);
