@@ -175,6 +175,7 @@ public class DAO {
             		{
             			pricelist.pricelist_all.get(j).set_total_mrp((shoppinglist.shoppingitems.get(i).getquantity())*(pricelist.pricelist_all.get(j).get_mrp()));
             			pricelist.pricelist_all.get(j).set_total_selling_price((shoppinglist.shoppingitems.get(i).getquantity())*(pricelist.pricelist_all.get(j).get_selling_price()));
+            			pricelist.pricelist_all.get(j).set_quantity(shoppinglist.shoppingitems.get(i).getquantity());
             		}
             	}
             }

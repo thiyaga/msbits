@@ -117,6 +117,11 @@ public class pricelist {
 		return total_selling_price;
 	}
 	
+	public void set_quantity(float quantity)
+	{
+		this.quantity = quantity;
+	}
+	
 		
 	public void add_pricelist_all(pricelist pricelist)
 	{
