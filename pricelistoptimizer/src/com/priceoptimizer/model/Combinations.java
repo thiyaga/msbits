@@ -9,6 +9,7 @@ public class Combinations {
 	public float total_mrp;
 	public float total_selling_price;
 	public boolean all_items_present;
+	public int combination_id;
 	public float total_msrsp; //MSRSP - Minimum of Single Retailer Selling Price
 	public float total_marsp; //MARSP - Minimum of All Retailer Selling Price 
 	public float total_mwrsp; //MWRSP - Minimum of Within Retailer Selling Price
@@ -70,6 +71,11 @@ public class Combinations {
 	public boolean get_all_items_present()
 	{
 		return all_items_present;
+	}
+	
+	public void set_combination_id(int combination_id)
+	{
+		this.combination_id = combination_id;
 	}
 	
 	public void add_retailer_combination(int retailer_id)

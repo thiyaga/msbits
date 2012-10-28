@@ -95,7 +95,7 @@ public class priceoptimizer {
 	{
 		for(int i=0;i< pricelist.pricelist_selected.size();i++)
 		{
-			if(pricelist.pricelist_selected.get(i).get_min_selling_price() == pricelist.pricelist_selected.get(i).get_selling_price())
+			if(pricelist.pricelist_selected.get(i).get_min_selling_price() == pricelist.pricelist_selected.get(i).get_selling_price() && pricelist.pricelist_selected.get(i).get_min_selling_price() < pricelist.pricelist_selected.get(i).get_mrp())
 			{
 				pricelist.add_retailers_best(pricelist.pricelist_selected.get(i).get_retailer_id());
 			}
@@ -113,6 +113,11 @@ public class priceoptimizer {
 	{
 		int n = pricelist.retailers_all.size();
 		int k = pricelist.retailers_best.size();
+		
+		if(k==0)
+		{
+			k=1;
+		}
 		
 		Map<String,Integer> retailer_index_map = new HashMap<String,Integer>();
 		
@@ -280,8 +285,14 @@ public class priceoptimizer {
 	public static void generate_optimized_combinations(Combinations combinations,pricelist pricelist)
 	{
 		int max_number_retailers = pricelist.retailers_best.size();
+		
 		float min_total_selling_price=0;
 		boolean first_time=true;
+		
+		if(max_number_retailers==0)
+		{
+			max_number_retailers=1;
+		}
 		
 		for(int i=1;i<=max_number_retailers;i++)
 		{
@@ -317,7 +328,8 @@ public class priceoptimizer {
 		}
 		
 		for(int i=0;i<combinations.all_combinations.size();i++)
-		{
+		{	
+			combinations.all_combinations.get(i).set_combination_id(i);
 			if(combinations.all_combinations.get(i).get_all_items_present()==true)
 			{
 				if(combinations.all_combinations.get(i).get_total_mwrsp() == combinations.all_combinations.get(i).get_total_selling_price())
